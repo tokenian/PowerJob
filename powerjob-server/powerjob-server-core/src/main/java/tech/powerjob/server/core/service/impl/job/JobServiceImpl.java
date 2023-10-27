@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tech.powerjob.common.PowerQuery;
 import tech.powerjob.common.enums.InstanceStatus;
@@ -31,6 +32,7 @@ import tech.powerjob.server.persistence.remote.repository.InstanceInfoRepository
 import tech.powerjob.server.persistence.remote.repository.JobInfoRepository;
 import tech.powerjob.server.remote.server.redirector.DesignateServer;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -65,7 +67,6 @@ public class JobServiceImpl implements JobService {
      */
     @Override
     public Long saveJob(SaveJobInfoRequest request) {
-
         request.valid();
 
         JobInfoDO jobInfoDO;
@@ -118,6 +119,19 @@ public class JobServiceImpl implements JobService {
         }
         JobInfoDO res = jobInfoRepository.saveAndFlush(jobInfoDO);
         return res.getId();
+    }
+
+    @Override
+    @Transactional
+    public List<Long> saveJob(List<SaveJobInfoRequest> requests) {
+        List<Long> jobIds = new ArrayList<>(requests.size());
+
+        for (SaveJobInfoRequest request: requests) {
+            Long id = saveJob(request);
+            jobIds.add(id);
+        }
+
+        return jobIds;
     }
 
     /**
@@ -180,8 +194,9 @@ public class JobServiceImpl implements JobService {
         delay = delay == null ? 0 : delay;
         JobInfoDO jobInfo = jobInfoRepository.findById(jobId).orElseThrow(() -> new IllegalArgumentException("can't find job by id:" + jobId));
 
-        log.info("[Job-{}] try to run job in app[{}], instanceParams={},delay={} ms.", jobInfo.getId(), appId, instanceParams, delay);
-        final InstanceInfoDO instanceInfo = instanceService.create(jobInfo.getId(), jobInfo.getAppId(), jobInfo.getJobParams(), instanceParams, null, System.currentTimeMillis() + Math.max(delay, 0));
+        log.info("[Job-{}] try to run job in app[{}], service-{}, instanceParams={},delay={} ms.", jobInfo.getId(), appId, jobInfo.getServiceName(), instanceParams, delay);
+        final InstanceInfoDO instanceInfo = instanceService.create(jobInfo.getId(), jobInfo.getAppId(), jobInfo.getServiceName(), jobInfo.getJobParams(),
+                instanceParams, null, System.currentTimeMillis() + Math.max(delay, 0));
         instanceInfoRepository.flush();
         if (delay <= 0) {
             dispatchService.dispatch(jobInfo, instanceInfo.getInstanceId(), Optional.of(instanceInfo),Optional.empty());
@@ -213,21 +228,22 @@ public class JobServiceImpl implements JobService {
 
     /**
      * 导出某个任务为 JSON
-     * @param jobId jobId
+     * @param jobIdList jobId数组
      * @return 导出结果
      */
     @Override
-    public SaveJobInfoRequest exportJob(Long jobId) {
-        Optional<JobInfoDO> jobInfoOpt = jobInfoRepository.findById(jobId);
-        if (!jobInfoOpt.isPresent()) {
-            throw new IllegalArgumentException("can't find job by jobId: " + jobId);
+    public List<SaveJobInfoRequest> exportJob(List<Long> jobIdList) {
+        List<JobInfoDO> jobInfoOpt = jobInfoRepository.findByIdIn(jobIdList);
+        if (CollectionUtils.isEmpty(jobInfoOpt)) {
+            throw new IllegalArgumentException("can't find jobs by jobIdArray: " + jobIdList);
         }
-        final JobInfoDO jobInfoDO = jobInfoOpt.get();
-        final SaveJobInfoRequest saveJobInfoRequest = JobConverter.convertJobInfoDO2SaveJobInfoRequest(jobInfoDO);
-        saveJobInfoRequest.setId(null);
-        saveJobInfoRequest.setJobName(saveJobInfoRequest.getJobName() + "_EXPORT_" + System.currentTimeMillis());
-        log.info("[Job-{}] [exportJob] jobInfoDO: {}, saveJobInfoRequest: {}", jobId, JsonUtils.toJSONString(jobInfoDO), JsonUtils.toJSONString(saveJobInfoRequest));
-        return saveJobInfoRequest;
+
+        return jobInfoOpt.stream().map(JobConverter::convertJobInfoDO2SaveJobInfoRequest).map(saveJobInfoRequest -> {
+            saveJobInfoRequest.setId(null);
+            log.info("[exportJob] saveJobInfoRequest: {}", JsonUtils.toJSONString(saveJobInfoRequest));
+
+            return saveJobInfoRequest;
+        }).collect(Collectors.toList());
     }
 
     /**

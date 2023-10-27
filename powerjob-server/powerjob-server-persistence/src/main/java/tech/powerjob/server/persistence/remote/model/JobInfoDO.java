@@ -43,6 +43,12 @@ public class JobInfoDO {
      * 任务所属的应用ID
      */
     private Long appId;
+
+    /**
+     * 任务具体执行的微服务名
+     */
+    private String serviceName;
+
     /**
      * 任务自带的参数
      */

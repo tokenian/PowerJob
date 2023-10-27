@@ -46,9 +46,16 @@ public class SystemInfoController {
 
     @GetMapping("/listWorker")
     public ResultDTO<List<WorkerStatusVO>> listWorker(Long appId) {
-
         List<WorkerInfo> workerInfos = workerClusterQueryService.getAllWorkers(appId);
+
         return ResultDTO.success(workerInfos.stream().map(WorkerStatusVO::new).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/versaOnline")
+    public ResultDTO<Void> versaOnline(Long appId, String address) {
+        workerClusterQueryService.versaOnline(appId, address);
+
+        return ResultDTO.success(null);
     }
 
     @GetMapping("/overview")

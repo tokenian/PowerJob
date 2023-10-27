@@ -19,8 +19,9 @@ public class DisconnectedWorkerFilter implements WorkerFilter {
     public boolean filter(WorkerInfo workerInfo, JobInfoDO jobInfo) {
         boolean timeout = workerInfo.timeout();
         if (timeout) {
-            log.info("[Job-{}] filter worker[{}] due to timeout(lastActiveTime={})", jobInfo.getId(), workerInfo.getAddress(), workerInfo.getLastActiveTime());
+            log.info("[Job-{}] [Service-{}] filter worker[{}] due to timeout(lastActiveTime={})", jobInfo.getId(), jobInfo.getServiceName(), workerInfo.getAddress(), workerInfo.getLastActiveTime());
         }
+
         return timeout;
     }
 }

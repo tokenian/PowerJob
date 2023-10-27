@@ -15,15 +15,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-import tech.powerjob.common.PowerJobDKey;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import tech.powerjob.common.PowerJobDKey;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 import static java.util.Collections.emptyList;
@@ -40,20 +39,41 @@ public class NetUtils {
     /**
      * returned port range is [30000, 39999]
      */
-    private static final int RND_PORT_START = 30000;
+    private static final int RND_PORT_START = 27777;
     private static final int RND_PORT_END = 65535;
 
     private static volatile String HOST_ADDRESS;
     private static final String LOCALHOST_VALUE = "127.0.0.1";
     private static volatile InetAddress LOCAL_ADDRESS = null;
     private static final Pattern IP_PATTERN = Pattern.compile("\\d{1,3}(\\.\\d{1,3}){3,5}$");
-    private static final String ANY_HOST_VALUE = "0.0.0.0";
+    public static final String ANY_HOST_VALUE = "0.0.0.0";
+
+    /**
+     * store the used port.
+     * the set used only on the synchronized method.
+     */
+    private static BitSet USED_PORT = new BitSet(65536);
 
     private NetUtils() {
     }
 
-    public static int getRandomPort() {
-        return ThreadLocalRandom.current().nextInt(RND_PORT_START, RND_PORT_END);
+    public static synchronized int getRandomPort() {
+        int port = RND_PORT_START;
+
+        for (int i = RND_PORT_START; i < RND_PORT_END; i++) {
+            if (USED_PORT.get(i)) {
+                continue;
+            }
+            try (ServerSocket ignored = new ServerSocket(i)) {
+                USED_PORT.set(i);
+                port = i;
+                break;
+            } catch (IOException e) {
+                // continue
+            }
+        }
+
+        return port;
     }
 
     /**
@@ -81,7 +101,7 @@ public class NetUtils {
             return HOST_ADDRESS;
         }
 
-        String addressFromJVM = System.getProperty(PowerJobDKey.BIND_LOCAL_ADDRESS);
+        String addressFromJVM = PropertyUtils.readProperty(PowerJobDKey.BIND_LOCAL_ADDRESS);
         if (StringUtils.isNotEmpty(addressFromJVM)) {
             log.info("[Net] use address from[{}]: {}", PowerJobDKey.BIND_LOCAL_ADDRESS, addressFromJVM);
             return HOST_ADDRESS = addressFromJVM;
@@ -320,7 +340,7 @@ public class NetUtils {
      * or <code>false</code>
      */
     public static boolean isPreferredNetworkInterface(NetworkInterface networkInterface) {
-        String preferredNetworkInterface = System.getProperty(PowerJobDKey.PREFERRED_NETWORK_INTERFACE);
+        String preferredNetworkInterface = PropertyUtils.readProperty(PowerJobDKey.PREFERRED_NETWORK_INTERFACE);
         if (Objects.equals(networkInterface.getDisplayName(), preferredNetworkInterface)) {
             return true;
         }
@@ -334,7 +354,7 @@ public class NetUtils {
     }
 
     static boolean ignoreInterfaceByConfig(String interfaceName) {
-        String regex = System.getProperty(PowerJobDKey.IGNORED_NETWORK_INTERFACE_REGEX);
+        String regex = PropertyUtils.readProperty(PowerJobDKey.IGNORED_NETWORK_INTERFACE_REGEX);
         if (StringUtils.isBlank(regex)) {
             return false;
         }

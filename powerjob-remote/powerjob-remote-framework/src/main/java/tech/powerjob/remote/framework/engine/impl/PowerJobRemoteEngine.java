@@ -26,7 +26,6 @@ public class PowerJobRemoteEngine implements RemoteEngine {
 
     @Override
     public EngineOutput start(EngineConfig engineConfig) {
-
         final String engineType = engineConfig.getType();
         EngineOutput engineOutput = new EngineOutput();
         log.info("[PowerJobRemoteEngine] [{}] start remote engine with config: {}", engineType, engineConfig);

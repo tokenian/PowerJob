@@ -23,7 +23,6 @@ public class TimingStrategyService {
 
     private static final List<String> TIPS = Collections.singletonList("It is valid, but has not trigger time list!");
 
-
     private final Map<TimeExpressionType, TimingStrategyHandler> strategyContainer;
 
     public TimingStrategyService(List<TimingStrategyHandler> timingStrategyHandlers) {
@@ -44,10 +43,11 @@ public class TimingStrategyService {
      * @return 调度时间列表
      */
     public List<String> calculateNextTriggerTimes(TimeExpressionType timeExpressionType, String timeExpression, Long startTime, Long endTime) {
-
         TimingStrategyHandler timingStrategyHandler = getHandler(timeExpressionType);
+
         List<Long> triggerTimeList = new ArrayList<>(NEXT_N_TIMES);
         Long nextTriggerTime = System.currentTimeMillis();
+
         do {
             nextTriggerTime = timingStrategyHandler.calculateNextTriggerTime(nextTriggerTime, timeExpression, startTime, endTime);
             if (nextTriggerTime == null) {
@@ -97,7 +97,6 @@ public class TimingStrategyService {
         return nextTriggerTime;
     }
 
-
     public void validate(TimeExpressionType timeExpressionType, String timeExpression, Long startTime, Long endTime) {
         if (endTime != null) {
             if (endTime <= System.currentTimeMillis()) {
@@ -107,9 +106,9 @@ public class TimingStrategyService {
                 throw new PowerJobException("lifecycle is invalid! start time must earlier then end time.");
             }
         }
+
         getHandler(timeExpressionType).validate(timeExpression);
     }
-
 
     private TimingStrategyHandler getHandler(TimeExpressionType timeExpressionType) {
         TimingStrategyHandler timingStrategyHandler = strategyContainer.get(timeExpressionType);

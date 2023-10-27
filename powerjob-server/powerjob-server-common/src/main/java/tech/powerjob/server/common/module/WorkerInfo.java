@@ -18,6 +18,13 @@ import java.util.List;
 @Slf4j
 public class WorkerInfo {
 
+    private String serviceName;
+
+    /**
+     * 是否在线，默认机器注册时上线
+     */
+    private boolean online;
+
     private String address;
 
     private long lastActiveTime;
@@ -43,6 +50,7 @@ public class WorkerInfo {
     private static final long WORKER_TIMEOUT_MS = 60000;
 
     public void refresh(WorkerHeartbeat workerHeartbeat) {
+        serviceName = workerHeartbeat.getServiceName();
         address = workerHeartbeat.getWorkerAddress();
         lastActiveTime = workerHeartbeat.getHeartbeatTime();
         protocol = workerHeartbeat.getProtocol();

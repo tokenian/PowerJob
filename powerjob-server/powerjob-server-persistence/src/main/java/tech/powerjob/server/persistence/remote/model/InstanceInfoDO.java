@@ -30,18 +30,27 @@ public class InstanceInfoDO {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
+
     /**
      * 任务ID
      */
     private Long jobId;
+
     /**
      * 任务所属应用的ID，冗余提高查询效率
      */
     private Long appId;
+
+    /**
+     * 任务具体执行的微服务名
+     */
+    private String serviceName;
+
     /**
      * 任务所属应用的ID，冗余提高查询效率
      */
     private Long instanceId;
+
     /**
      * 任务参数（静态）
      *
@@ -50,24 +59,29 @@ public class InstanceInfoDO {
     @Lob
     @Column
     private String jobParams;
+
     /**
      * 任务实例参数（动态）
      */
     @Lob
     @Column
     private String instanceParams;
+
     /**
      * 该任务实例的类型，普通/工作流（InstanceType）
      */
     private Integer type;
+
     /**
      * 该任务实例所属的 workflow ID，仅 workflow 任务存在
      */
     private Long wfInstanceId;
+
     /**
      * 任务状态 {@link InstanceStatus}
      */
     private Integer status;
+
     /**
      * 执行结果（允许存储稍大的结果）
      */

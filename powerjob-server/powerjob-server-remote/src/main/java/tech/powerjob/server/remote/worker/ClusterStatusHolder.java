@@ -53,6 +53,7 @@ public class ClusterStatusHolder {
         WorkerInfo workerInfo = address2WorkerInfo.computeIfAbsent(workerAddress, ignore -> {
             WorkerInfo wf = new WorkerInfo();
             wf.refresh(heartbeat);
+            wf.setOnline(true);
             return wf;
         });
         long oldTime = workerInfo.getLastActiveTime();

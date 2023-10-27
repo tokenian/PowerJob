@@ -21,8 +21,6 @@ public class AkkaConstant {
      * @return actorSystemName
      */
     public static String fetchActorSystemName(ServerType serverType) {
-
-
         return serverType == ServerType.SERVER ? SERVER_ACTOR_SYSTEM_NAME : WORKER_ACTOR_SYSTEM_NAME;
     }
 

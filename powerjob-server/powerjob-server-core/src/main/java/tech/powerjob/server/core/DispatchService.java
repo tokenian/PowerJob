@@ -154,6 +154,7 @@ public class DispatchService {
             instanceManager.processFinishedInstance(instanceId, instanceInfo.getWfInstanceId(), FAILED, SystemInstanceResult.NO_WORKER_AVAILABLE);
             return;
         }
+
         // 判断是否超载，在所有可用 worker 超载的情况下直接跳过当前任务
         suitableWorkers = filterOverloadWorker(suitableWorkers);
         if (suitableWorkers.isEmpty()) {
@@ -162,6 +163,7 @@ public class DispatchService {
             log.warn("[Dispatcher-{}|{}] cancel to dispatch job due to all worker is overload", jobId, instanceId);
             return;
         }
+
         List<String> workerIpList = suitableWorkers.stream().map(WorkerInfo::getAddress).collect(Collectors.toList());
         // 构造任务调度请求
         ServerScheduleJobReq req = constructServerScheduleJobReq(jobInfo, instanceInfo, workerIpList);
@@ -181,14 +183,15 @@ public class DispatchService {
     }
 
     private List<WorkerInfo> filterOverloadWorker(List<WorkerInfo> suitableWorkers) {
-
         List<WorkerInfo> res = new ArrayList<>(suitableWorkers.size());
         for (WorkerInfo suitableWorker : suitableWorkers) {
             if (suitableWorker.overload()){
                 continue;
             }
+
             res.add(suitableWorker);
         }
+
         return res;
     }
 

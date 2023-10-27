@@ -6,6 +6,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.util.StringUtils;
 import tech.powerjob.worker.common.PowerJobWorkerConfig;
 import tech.powerjob.worker.extension.processor.ProcessorFactory;
 import tech.powerjob.worker.processor.impl.BuildInSpringMethodProcessorFactory;
@@ -53,6 +54,11 @@ public class PowerJobSpringWorker implements ApplicationContextAware, Initializi
         processorFactories.add(springProcessorFactory);
         processorFactories.add(springMethodProcessorFactory);
         config.setProcessorFactoryList(processorFactories);
+
+        if(!StringUtils.hasText(config.getServiceName())) {
+            String applicationName = applicationContext.getEnvironment().getRequiredProperty("spring.application.name");
+            config.setServiceName(applicationName);
+        }
     }
 
     @Override

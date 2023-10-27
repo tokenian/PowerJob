@@ -32,6 +32,8 @@ Refer to [PowerJob Introduction](https://www.yuque.com/powerjob/en/introduce) fo
 
 - **High Availability & High Performance:**  PowerJob supports unlimited horizontal expansion. It's easy to achieve high availability and performance by deploying as many PowerJob server and worker nodes.
 
+- **Micro Service Support:** Cluster with a group associated micro service, Online or Offline Service for sake of debug or deploy.
+
 ### Applicable scenes
 
 - Timed tasks, for example, allocating e-coupons on 9 AM every morning.

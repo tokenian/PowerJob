@@ -142,4 +142,15 @@ public class WorkerClusterQueryService {
         }
         return false;
     }
+
+    @DesignateServer
+    public boolean versaOnline(Long appId, String address) {
+        Optional<WorkerInfo> optionalWorkerInfo = getWorkerInfoByAddress(appId, address);
+        if(optionalWorkerInfo.isPresent()) {
+            boolean online = optionalWorkerInfo.get().isOnline();
+            optionalWorkerInfo.get().setOnline(!online);
+        }
+
+        return true;
+    }
 }

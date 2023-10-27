@@ -15,6 +15,11 @@ public class QueryJobInfoRequest {
      * 任务所属应用ID
      */
     private Long appId;
+
+    /**
+     * 微服务
+     */
+    private String serviceName;
     /**
      * 当前页码
      */
@@ -27,5 +32,6 @@ public class QueryJobInfoRequest {
      * 任务ID
      */
     private Long jobId;
+
     private String keyword;
 }

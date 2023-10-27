@@ -81,8 +81,14 @@ public class PowerJobWorker {
             // 初始化网络数据，区别对待上报地址和本机绑定地址（对外统一使用上报地址）
             String localBindIp = NetUtils.getLocalHost();
             int localBindPort = config.getPort();
+
+            if(localBindPort <=0) {
+                localBindPort = NetUtils.getRandomPort();
+            }
+
             String externalIp = PropertyUtils.readProperty(PowerJobDKey.NT_EXTERNAL_ADDRESS, localBindIp);
             String externalPort = PropertyUtils.readProperty(PowerJobDKey.NT_EXTERNAL_PORT, String.valueOf(localBindPort));
+
             log.info("[PowerJobWorker] [ADDRESS_INFO] localBindIp: {}, localBindPort: {}; externalIp: {}, externalPort: {}", localBindIp, localBindPort, externalIp, externalPort);
             workerRuntime.setWorkerAddress(Address.toFullAddress(externalIp, Integer.parseInt(externalPort)));
 

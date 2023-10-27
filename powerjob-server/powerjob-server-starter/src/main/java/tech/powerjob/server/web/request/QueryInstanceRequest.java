@@ -16,6 +16,12 @@ public class QueryInstanceRequest {
      * 任务所属应用ID
      */
     private Long appId;
+
+    /**
+     * 微服务
+     */
+    private String serviceName;
+
     /**
      * 当前页码
      */
@@ -28,8 +34,11 @@ public class QueryInstanceRequest {
      * 查询条件（NORMAL/WORKFLOW）
      */
     private InstanceType type;
+
     private Long instanceId;
+
     private Long jobId;
+
     private Long wfInstanceId;
 
     private String status;

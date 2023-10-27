@@ -49,6 +49,7 @@ public class WorkerHealthReporter implements Runnable {
         heartbeat.setSystemMetrics(systemMetrics);
         heartbeat.setWorkerAddress(workerRuntime.getWorkerAddress());
         heartbeat.setAppName(workerRuntime.getWorkerConfig().getAppName());
+        heartbeat.setServiceName(workerRuntime.getWorkerConfig().getServiceName());
         heartbeat.setAppId(workerRuntime.getAppId());
         heartbeat.setHeartbeatTime(System.currentTimeMillis());
         heartbeat.setVersion(PowerJobWorkerVersion.getVersion());

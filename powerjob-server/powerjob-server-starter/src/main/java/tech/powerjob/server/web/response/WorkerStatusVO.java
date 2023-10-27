@@ -35,10 +35,17 @@ public class WorkerStatusVO {
 
     private boolean overloading;
 
+    private String serviceName;
+
     /**
      * 1 -> 健康，绿色，2 -> 一般，橙色，3 -> 糟糕，红色，9999 -> 非在线机器
      */
     private int status;
+
+    /**
+     * 是否在线，默认机器注册时上线
+     */
+    private boolean online;
 
     /**
      *  12.3%(4 cores)
@@ -95,5 +102,7 @@ public class WorkerStatusVO {
         this.heavyTaskTrackerNum = workerInfo.getHeavyTaskTrackerNum();
         this.lastOverloadTime = workerInfo.getLastOverloadTime();
         this.overloading = workerInfo.isOverloading();
+        this.serviceName = workerInfo.getServiceName();
+        this.online = workerInfo.isOnline();
     }
 }

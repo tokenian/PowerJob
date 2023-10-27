@@ -1,6 +1,7 @@
 package tech.powerjob.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
+import tech.powerjob.common.OmsConstant;
 
 /**
  * PropertyUtils
@@ -9,6 +10,10 @@ import org.apache.commons.lang3.StringUtils;
  * @since 2023/7/15
  */
 public class PropertyUtils {
+
+    public static String readProperty(String key) {
+        return readProperty(key, OmsConstant.EMPTY);
+    }
 
     public static String readProperty(String key, String defaultValue) {
         // 从启动参数读取
@@ -27,6 +32,7 @@ public class PropertyUtils {
         if (StringUtils.isNotEmpty(property)) {
             return property;
         }
+
         return defaultValue;
     }
 }

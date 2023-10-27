@@ -26,7 +26,6 @@
 
 
     <properties>
-        <springboot.version>2.7.14</springboot.version>
 
         <!-- MySQL version that corresponds to spring-boot-dependencies version. -->
         <mysql.version>8.0.33</mysql.version>
@@ -126,7 +125,6 @@
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
             </dependency>
-
 
         </dependencies>
     </dependencyManagement>

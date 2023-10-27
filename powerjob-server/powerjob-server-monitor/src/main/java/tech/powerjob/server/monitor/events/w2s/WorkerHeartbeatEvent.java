@@ -16,6 +16,8 @@ import tech.powerjob.server.monitor.Event;
 public class WorkerHeartbeatEvent implements Event {
 
     private String appName;
+
+    private String serviceName;
     /**
      * 虽然和 AppName 冗余，但考虑到其他日志使用 appId 监控，此处可方便潜在的其他处理
      */

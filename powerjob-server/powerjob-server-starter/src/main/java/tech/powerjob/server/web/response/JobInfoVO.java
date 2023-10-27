@@ -37,6 +37,12 @@ public class JobInfoVO {
      * 任务名称
      */
     private String jobName;
+
+    /**
+     * 任务具体执行的微服务名
+     */
+    private String serviceName;
+
     /**
      * 任务描述
      */

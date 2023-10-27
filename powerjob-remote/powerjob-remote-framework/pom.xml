@@ -13,14 +13,8 @@
     <artifactId>powerjob-remote-framework</artifactId>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <powerjob-common.version>4.3.6</powerjob-common.version>
         <reflections.version>0.10.2</reflections.version>
-
-
     </properties>
 
     <dependencies>

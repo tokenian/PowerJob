@@ -14,9 +14,11 @@ import io.vertx.ext.web.handler.BodyHandler;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import tech.powerjob.common.exception.PowerJobException;
+import tech.powerjob.common.utils.NetUtils;
 import tech.powerjob.remote.framework.actor.ActorInfo;
 import tech.powerjob.remote.framework.actor.HandlerInfo;
 import tech.powerjob.remote.framework.actor.ProcessType;
+import tech.powerjob.remote.framework.base.Address;
 import tech.powerjob.remote.framework.cs.CSInitializer;
 import tech.powerjob.remote.framework.cs.CSInitializerConfig;
 import tech.powerjob.remote.framework.transporter.Transporter;
@@ -91,11 +93,12 @@ public class HttpVertxCSInitializer implements CSInitializer {
 
         // 启动 vertx http server
         final int port = config.getBindAddress().getPort();
-        final String host = config.getBindAddress().getHost();
+        //机器多网卡情况下，对外暴露外网IP，监听出错
+//        final String host = config.getBindAddress().getHost();
 
         httpServer.requestHandler(router)
                 .exceptionHandler(e -> log.error("[PowerJob] unknown exception in Actor communication!", e))
-                .listen(port, host)
+                .listen(port, NetUtils.ANY_HOST_VALUE)
                 .toCompletionStage()
                 .toCompletableFuture()
                 .get(1, TimeUnit.MINUTES);

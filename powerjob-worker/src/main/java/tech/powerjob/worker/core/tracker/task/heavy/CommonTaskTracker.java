@@ -14,6 +14,7 @@ import tech.powerjob.common.model.InstanceDetail;
 import tech.powerjob.common.request.ServerScheduleJobReq;
 import tech.powerjob.common.request.TaskTrackerReportInstanceStatusReq;
 import tech.powerjob.common.utils.CollectionUtils;
+import tech.powerjob.common.utils.PropertyUtils;
 import tech.powerjob.worker.common.WorkerRuntime;
 import tech.powerjob.worker.common.constants.TaskConstant;
 import tech.powerjob.worker.common.constants.TaskStatus;
@@ -62,7 +63,7 @@ public class CommonTaskTracker extends HeavyTaskTracker {
         persistenceRootTask();
 
         // 开启定时状态检查
-        int delay = Integer.parseInt(System.getProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "13"));
+        int delay = Integer.parseInt(PropertyUtils.readProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "13"));
         scheduledPool.scheduleWithFixedDelay(new StatusCheckRunnable(), 3, delay, TimeUnit.SECONDS);
 
         // 如果是 MR 任务，则需要启动执行器动态检测装置

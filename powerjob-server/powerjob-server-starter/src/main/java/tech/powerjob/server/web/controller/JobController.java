@@ -1,6 +1,7 @@
 package tech.powerjob.server.web.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import tech.powerjob.common.request.http.SaveJobInfoRequest;
 import tech.powerjob.common.response.ResultDTO;
 import tech.powerjob.server.common.constants.SwitchableStatus;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,6 +43,14 @@ public class JobController {
     @PostMapping("/save")
     public ResultDTO<Void> saveJobInfo(@RequestBody SaveJobInfoRequest request) {
         jobService.saveJob(request);
+
+        return ResultDTO.success(null);
+    }
+
+    @PostMapping("/batchSave")
+    public ResultDTO<Void> saveJobInfo(@RequestBody List<SaveJobInfoRequest> requests) {
+        jobService.saveJob(requests);
+
         return ResultDTO.success(null);
     }
 
@@ -50,8 +60,8 @@ public class JobController {
     }
 
     @GetMapping("/export")
-    public ResultDTO<SaveJobInfoRequest> exportJob(String jobId) {
-        return ResultDTO.success(jobService.exportJob(Long.valueOf(jobId)));
+    public ResultDTO<List<SaveJobInfoRequest>> exportJob(Long[] jobIdList) {
+        return ResultDTO.success(jobService.exportJob(Arrays.asList(jobIdList)));
     }
 
     @GetMapping("/disable")
@@ -79,14 +89,13 @@ public class JobController {
         Page<JobInfoDO> jobInfoPage;
 
         // 无查询条件，查询全部
-        if (request.getJobId() == null && StringUtils.isEmpty(request.getKeyword())) {
+        if (request.getJobId() == null && StringUtils.isEmpty(request.getKeyword()) && StringUtils.isEmpty(request.getServiceName())) {
             jobInfoPage = jobInfoRepository.findByAppIdAndStatusNot(request.getAppId(), SwitchableStatus.DELETED.getV(), pageRequest);
             return ResultDTO.success(convertPage(jobInfoPage));
         }
 
         // 有 jobId，直接精确查询
         if (request.getJobId() != null) {
-
             Optional<JobInfoDO> jobInfoOpt = jobInfoRepository.findById(request.getJobId());
 
             PageResult<JobInfoVO> result = new PageResult<>();
@@ -110,6 +119,11 @@ public class JobController {
             result.setData(Lists.newArrayList(JobInfoVO.from(jobInfoOpt.get())));
 
             return ResultDTO.success(result);
+        }
+
+        if(!StringUtils.isEmpty(request.getServiceName())) {
+            jobInfoPage = jobInfoRepository.findByAppIdAndServiceNameAndStatusNot(request.getAppId(), request.getServiceName(), SwitchableStatus.DELETED.getV(), pageRequest);
+            return ResultDTO.success(convertPage(jobInfoPage));
         }
 
         // 模糊查询

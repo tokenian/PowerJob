@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 import tech.powerjob.common.utils.CommonUtils;
 import tech.powerjob.common.utils.NetUtils;
 import tech.powerjob.worker.PowerJobSpringWorker;
@@ -27,7 +28,6 @@ public class PowerJobAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public PowerJobSpringWorker initPowerJob(PowerJobProperties properties) {
-
         PowerJobProperties.Worker worker = properties.getWorker();
 
         /*
@@ -42,18 +42,20 @@ public class PowerJobAutoConfiguration {
          * Create OhMyConfig object for setting properties.
          */
         PowerJobWorkerConfig config = new PowerJobWorkerConfig();
+
         /*
          * Configuration of worker port. Random port is enabled when port is set with non-positive number.
          */
         if (worker.getPort() != null) {
-            config.setPort(worker.getPort());
-        } else {
-            int port = worker.getAkkaPort();
-            if (port <= 0) {
-                port = NetUtils.getRandomPort();
+            if(worker.getPort() <= 0) {
+                worker.setPort(NetUtils.getRandomPort());
             }
-            config.setPort(port);
+        } else {
+            worker.setPort(NetUtils.getRandomPort());
         }
+
+        config.setPort(worker.getPort());
+
         /*
          * appName, name of the application. Applications should be registered in advance to prevent
          * error. This property should be the same with what you entered for appName when getting
@@ -62,6 +64,12 @@ public class PowerJobAutoConfiguration {
         config.setAppName(worker.getAppName());
         config.setServerAddress(serverAddress);
         config.setProtocol(worker.getProtocol());
+
+        /**
+         * set service name, if it is empty use spring.application.name
+         */
+        config.setServiceName(worker.getServiceName());
+
         /*
          * For non-Map/MapReduce tasks, {@code memory} is recommended for speeding up calculation.
          * Map/MapReduce tasks may produce batches of subtasks, which could lead to OutOfMemory

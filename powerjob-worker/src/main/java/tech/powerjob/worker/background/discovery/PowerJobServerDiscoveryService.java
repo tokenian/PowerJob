@@ -202,7 +202,6 @@ public class PowerJobServerDiscoveryService implements ServerDiscoveryService {
         }
     }
 
-
     private String acquire(String httpServerAddress) {
         String result = null;
         String url = buildServerDiscoveryUrl(httpServerAddress);
@@ -223,13 +222,13 @@ public class PowerJobServerDiscoveryService implements ServerDiscoveryService {
     }
 
     private String buildServerDiscoveryUrl(String address) {
-
         ServerDiscoveryRequest serverDiscoveryRequest = new ServerDiscoveryRequest()
                 .setAppId(appInfo.getAppId())
                 .setCurrentServer(currentServerAddress)
                 .setProtocol(config.getProtocol().name().toUpperCase());
 
         String query = Joiner.on(OmsConstant.AND).withKeyValueSeparator(OmsConstant.EQUAL).join(serverDiscoveryRequest.toMap());
+
         return String.format(DISCOVERY_URL, address, query);
     }
 }

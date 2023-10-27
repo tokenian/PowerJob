@@ -1,5 +1,6 @@
 package tech.powerjob.worker.autoconfigure;
 
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import tech.powerjob.common.RemoteConstant;
 import tech.powerjob.common.enums.Protocol;
 import tech.powerjob.worker.common.constants.StoreStrategy;
@@ -19,10 +20,18 @@ import org.springframework.boot.context.properties.DeprecatedConfigurationProper
 @ConfigurationProperties(prefix = "powerjob")
 public class PowerJobProperties {
 
+    @NestedConfigurationProperty
     private final Worker worker = new Worker();
 
     public Worker getWorker() {
         return worker;
+    }
+
+    @NestedConfigurationProperty
+    private final Network network = new Network();
+
+    public Network getNetwork() {
+        return network;
     }
 
     @Deprecated
@@ -109,6 +118,17 @@ public class PowerJobProperties {
          * property should be assigned with the same value as what you entered for the appName.
          */
         private String appName;
+
+        /**
+         * Name of service. it is part of appName, for users to divide business into subtle control
+         */
+        private String serviceName;
+
+        /**
+         * password corresponding to appName
+         */
+        private String passwd;
+
         /**
          * Akka port of Powerjob-worker, optional value. Default value of this property is 27777.
          * If multiple PowerJob-worker nodes were deployed, different, unique ports should be assigned.
@@ -135,7 +155,7 @@ public class PowerJobProperties {
         /**
          * Protocol for communication between WORKER and server
          */
-        private Protocol protocol = Protocol.AKKA;
+        private Protocol protocol = Protocol.HTTP;
         /**
          * Local store strategy for H2 database. {@code disk} or {@code memory}.
          */
@@ -170,5 +190,25 @@ public class PowerJobProperties {
          */
         private Integer healthReportInterval = 10;
 
+    }
+
+    @Setter
+    @Getter
+    public static class Network{
+
+        /**
+         * local address to bind
+         */
+        private String bindLocalAddress;
+
+        /**
+         * when there are many network card, identity address
+         */
+        private String externalAddress;
+
+        /**
+         * when there are many network card, identity port
+         */
+        private int externalPort;
     }
 }

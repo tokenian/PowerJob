@@ -64,6 +64,7 @@ public abstract class AbWorkerRequestHandler implements IWorkerRequestHandler {
         long startMs = System.currentTimeMillis();
         WorkerHeartbeatEvent event = new WorkerHeartbeatEvent()
                 .setAppName(heartbeat.getAppName())
+                .setServiceName(heartbeat.getServiceName())
                 .setAppId(heartbeat.getAppId())
                 .setVersion(heartbeat.getVersion())
                 .setProtocol(heartbeat.getProtocol())

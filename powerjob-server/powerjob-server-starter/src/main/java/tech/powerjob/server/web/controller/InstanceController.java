@@ -44,8 +44,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/instance")
 public class InstanceController {
 
-
-
     @Resource
     private InstanceService instanceService;
     @Resource

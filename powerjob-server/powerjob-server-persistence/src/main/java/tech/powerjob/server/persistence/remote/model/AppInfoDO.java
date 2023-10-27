@@ -23,6 +23,9 @@ public class AppInfoDO {
     private Long id;
 
     private String appName;
+
+    private String serviceName;
+
     /**
      * 应用分组密码
      */

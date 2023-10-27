@@ -23,6 +23,8 @@ public class OmsConstant {
 
     public static final String COMMA = ",";
 
+    public static final String EMPTY = "";
+
     public static final String AND = "&";
 
     public static final String EQUAL = "=";

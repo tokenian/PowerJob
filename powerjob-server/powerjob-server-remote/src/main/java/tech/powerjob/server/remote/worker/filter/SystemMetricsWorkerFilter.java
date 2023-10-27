@@ -23,6 +23,7 @@ public class SystemMetricsWorkerFilter implements WorkerFilter {
         if (filter) {
             log.info("[Job-{}] filter worker[{}] because the {} do not meet the requirements", jobInfo.getId(), workerInfo.getAddress(), workerInfo.getSystemMetrics());
         }
+
         return filter;
     }
 }

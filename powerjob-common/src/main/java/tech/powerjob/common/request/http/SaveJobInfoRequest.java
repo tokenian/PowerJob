@@ -32,6 +32,12 @@ public class SaveJobInfoRequest {
      * Name of the job.
      */
     private String jobName;
+
+    /**
+     * service name of the job
+     */
+    private String serviceName;
+
     /**
      * Description of the job.
      */
@@ -156,6 +162,7 @@ public class SaveJobInfoRequest {
      */
     public void valid() {
         CommonUtils.requireNonNull(jobName, "jobName can't be empty");
+        CommonUtils.requireNonNull(serviceName, "serviceName can't be empty");
         CommonUtils.requireNonNull(appId, "appId can't be empty");
         CommonUtils.requireNonNull(processorInfo, "processorInfo can't be empty");
         CommonUtils.requireNonNull(executeType, "executeType can't be empty");

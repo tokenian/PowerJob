@@ -30,6 +30,8 @@ public interface JobInfoRepository extends JpaRepository<JobInfoDO, Long>, JpaSp
 
     Page<JobInfoDO> findByAppIdAndStatusNot(Long appId, int status, Pageable pageable);
 
+    Page<JobInfoDO> findByAppIdAndServiceNameAndStatusNot(Long appId, String serviceName, int status, Pageable pageable);
+
     Page<JobInfoDO> findByAppIdAndJobNameLikeAndStatusNot(Long appId, String condition, int status, Pageable pageable);
 
     /**

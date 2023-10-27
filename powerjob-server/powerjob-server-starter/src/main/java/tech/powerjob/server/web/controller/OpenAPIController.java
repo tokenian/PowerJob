@@ -23,6 +23,7 @@ import tech.powerjob.server.persistence.remote.model.WorkflowInfoDO;
 import tech.powerjob.server.persistence.remote.model.WorkflowNodeInfoDO;
 import tech.powerjob.server.web.response.WorkflowInfoVO;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -72,7 +73,9 @@ public class OpenAPIController {
     @PostMapping(OpenAPIConstant.EXPORT_JOB)
     public ResultDTO<SaveJobInfoRequest> exportJob(Long jobId, Long appId) {
         checkJobIdValid(jobId, appId);
-        return ResultDTO.success(jobService.exportJob(jobId));
+        SaveJobInfoRequest result = jobService.exportJob(Arrays.asList(jobId)).get(0);
+
+        return ResultDTO.success(result);
     }
 
     @PostMapping(OpenAPIConstant.FETCH_JOB)

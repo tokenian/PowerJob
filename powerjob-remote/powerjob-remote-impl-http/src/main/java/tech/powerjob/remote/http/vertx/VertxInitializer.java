@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import tech.powerjob.common.OmsConstant;
 import tech.powerjob.common.PowerJobDKey;
+import tech.powerjob.common.utils.PropertyUtils;
 
 /**
  * VertxInitializer
@@ -66,7 +67,7 @@ public class VertxInitializer {
                 .setMaxPoolSize(Math.max(8, Runtime.getRuntime().availableProcessors()) * 2);
 
         // 长连接
-        String keepaliveTimeout = System.getProperty(PowerJobDKey.TRANSPORTER_KEEP_ALIVE_TIMEOUT, String.valueOf(DEFAULT_KEEP_ALIVE_TIMEOUT));
+        String keepaliveTimeout = PropertyUtils.readProperty(PowerJobDKey.TRANSPORTER_KEEP_ALIVE_TIMEOUT, String.valueOf(DEFAULT_KEEP_ALIVE_TIMEOUT));
         int keepaliveTimeoutInt = Integer.parseInt(keepaliveTimeout);
         if (keepaliveTimeoutInt > 0) {
             httpClientOptions.setKeepAlive(true).setKeepAliveTimeout(keepaliveTimeoutInt);
@@ -75,7 +76,7 @@ public class VertxInitializer {
         }
 
         // 压缩判定
-        String enableCompressing = System.getProperty(PowerJobDKey.TRANSPORTER_USE_COMPRESSING);
+        String enableCompressing = PropertyUtils.readProperty(PowerJobDKey.TRANSPORTER_USE_COMPRESSING);
         if (StringUtils.isNotEmpty(enableCompressing)) {
             httpClientOptions.setTryUseCompression(StringUtils.equalsIgnoreCase(enableCompressing, Boolean.TRUE.toString()));
         }

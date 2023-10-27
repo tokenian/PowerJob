@@ -9,6 +9,7 @@ import tech.powerjob.common.enums.InstanceStatus;
 import tech.powerjob.common.model.InstanceDetail;
 import tech.powerjob.common.request.ServerScheduleJobReq;
 import tech.powerjob.common.request.TaskTrackerReportInstanceStatusReq;
+import tech.powerjob.common.utils.PropertyUtils;
 import tech.powerjob.worker.common.WorkerRuntime;
 import tech.powerjob.worker.common.constants.TaskConstant;
 import tech.powerjob.worker.common.constants.TaskStatus;
@@ -20,6 +21,7 @@ import tech.powerjob.worker.extension.processor.ProcessorBean;
 import tech.powerjob.worker.extension.processor.ProcessorDefinition;
 import tech.powerjob.worker.log.OmsLoggerFactory;
 
+import java.util.Properties;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -89,7 +91,7 @@ public class LightTaskTracker extends TaskTracker {
             // 加载 Processor
             processorBean = workerRuntime.getProcessorLoader().load(new ProcessorDefinition().setProcessorType(req.getProcessorType()).setProcessorInfo(req.getProcessorInfo()));
             executeThread = new AtomicReference<>();
-            long delay = Integer.parseInt(System.getProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "15")) * 1000L;
+            long delay = Integer.parseInt(PropertyUtils.readProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "15")) * 1000L;
             // 初始延迟加入随机值，避免在高并发场景下所有请求集中在一个时间段
             long initDelay = RandomUtils.nextInt(5000, 10000);
             // 上报任务状态
@@ -388,7 +390,7 @@ public class LightTaskTracker extends TaskTracker {
 
         String threadName = thread.getName();
 
-        String allowStopThread = System.getProperty(PowerJobDKey.WORKER_ALLOWED_FORCE_STOP_THREAD);
+        String allowStopThread = PropertyUtils.readProperty(PowerJobDKey.WORKER_ALLOWED_FORCE_STOP_THREAD);
         if (!StringUtils.equalsIgnoreCase(allowStopThread, Boolean.TRUE.toString())) {
             log.warn("[TaskTracker-{}] PowerJob not allowed to force stop a thread by config", instanceId);
             return false;

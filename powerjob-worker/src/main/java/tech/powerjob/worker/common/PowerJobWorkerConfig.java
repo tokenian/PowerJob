@@ -27,6 +27,12 @@ public class PowerJobWorkerConfig {
      * Applications should be registered by powerjob-console in advance to prevent error.
      */
     private String appName;
+
+    /**
+     * Name of service. it is part of appName, for users to divide business into subtle control
+     */
+    private String serviceName;
+
     /**
      * Worker port
      * Random port is enabled when port is set with non-positive number.

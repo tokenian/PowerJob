@@ -17,6 +17,8 @@ public interface JobService {
 
     Long saveJob(SaveJobInfoRequest request);
 
+    List<Long> saveJob(List<SaveJobInfoRequest> requests);
+
     JobInfoDO copyJob(Long jobId);
 
     JobInfoDTO fetchJob(Long jobId);
@@ -33,5 +35,5 @@ public interface JobService {
 
     void enableJob(Long jobId);
 
-    SaveJobInfoRequest exportJob(Long jobId);
+    List<SaveJobInfoRequest> exportJob(List<Long> jobIdList);
 }

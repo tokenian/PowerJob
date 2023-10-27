@@ -10,6 +10,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import lombok.extern.slf4j.Slf4j;
 import tech.powerjob.common.serialize.JsonUtils;
+import tech.powerjob.common.utils.NetUtils;
 import tech.powerjob.remote.framework.actor.ActorInfo;
 import tech.powerjob.remote.framework.base.Address;
 import tech.powerjob.remote.framework.cs.CSInitializer;
@@ -47,7 +48,7 @@ public class AkkaCSInitializer implements CSInitializer {
 
         // 初始化 ActorSystem（macOS上 new ServerSocket 检测端口占用的方法并不生效，可能是AKKA是Scala写的缘故？没办法...只能靠异常重试了）
         Map<String, Object> overrideConfig = Maps.newHashMap();
-        overrideConfig.put("akka.remote.artery.canonical.hostname", bindAddress.getHost());
+        overrideConfig.put("akka.remote.artery.canonical.hostname", NetUtils.ANY_HOST_VALUE);
         overrideConfig.put("akka.remote.artery.canonical.port", bindAddress.getPort());
 
         Config akkaBasicConfig = ConfigFactory.load(AkkaConstant.AKKA_CONFIG);
