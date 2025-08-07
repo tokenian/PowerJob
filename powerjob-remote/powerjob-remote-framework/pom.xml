@@ -5,16 +5,18 @@
     <parent>
         <artifactId>powerjob-remote</artifactId>
         <groupId>tech.powerjob</groupId>
-        <version>4.3.6</version>
+        <version>5.1.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <version>4.3.6</version>
+    <version>5.1.1</version>
     <artifactId>powerjob-remote-framework</artifactId>
 
     <properties>
-        <powerjob-common.version>4.3.6</powerjob-common.version>
+        <powerjob-common.version>5.1.1</powerjob-common.version>
         <reflections.version>0.10.2</reflections.version>
+
+
     </properties>
 
     <dependencies>

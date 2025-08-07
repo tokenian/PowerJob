@@ -1,5 +1,8 @@
 package tech.powerjob.remote.http;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -40,6 +43,8 @@ import java.util.concurrent.TimeUnit;
  *  - vertx 唯一的缺点是其作为相对上层的框架，可能存在较为严重的包冲突问题，尤其是对于那些本身跑在 vertx-framework 上的用户
  *      - 不过该问题可以通过更换协议解决，预计后续提供一个基于 netty 和自定义协议的实现
  *
+ * 20240316 note：注意类名被强依赖，后续若有改动需要同步更改
+ *
  * @author tjq
  * @since 2022/12/31
  */
@@ -60,6 +65,19 @@ public class HttpVertxCSInitializer implements CSInitializer {
     @Override
     public void init(CSInitializerConfig config) {
         this.config = config;
+
+        // 【Vertx 版本升级时必须注意】临时解决 vertx 自带的 jackson 序列化无法支持字段升级问题（默认特性居然是不支持增删字段的序列化方式，外国框架也是一坨...）
+        try {
+            io.vertx.core.json.jackson.DatabindCodec.mapper()
+                    .configure(com.fasterxml.jackson.databind.MapperFeature.PROPAGATE_TRANSIENT_MARKER, true)
+                    .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
+                    .configure(JsonParser.Feature.IGNORE_UNDEFINED, true)
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                    .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        } catch (Throwable t) {
+            log.warn("[HttpVertxCSInitializer] hack jackson failed!", t);
+        }
+
         vertx = VertxInitializer.buildVertx();
         httpServer = VertxInitializer.buildHttpServer(vertx);
         httpClient = VertxInitializer.buildHttpClient(vertx);

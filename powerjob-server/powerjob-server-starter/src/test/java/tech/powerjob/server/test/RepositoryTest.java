@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import tech.powerjob.common.enums.InstanceStatus;
 import tech.powerjob.common.enums.TimeExpressionType;
 import tech.powerjob.common.enums.WorkflowInstanceStatus;
 import tech.powerjob.common.utils.NetUtils;
-import tech.powerjob.server.common.constants.SwitchableStatus;
+import tech.powerjob.common.enums.SwitchableStatus;
 import tech.powerjob.server.persistence.remote.model.InstanceInfoDO;
 import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 import tech.powerjob.server.persistence.remote.model.OmsLockDO;
@@ -53,7 +52,7 @@ public class RepositoryTest {
     public void testBatchLock() {
         List<OmsLockDO> locks = Lists.newArrayList();
         for (int i = 0; i < 10; i++) {
-            OmsLockDO lockDO = new OmsLockDO("lock" + i, NetUtils.getLocalHost(), 10000L);
+            OmsLockDO lockDO = new OmsLockDO("lock" + i, NetUtils.getLocalHost4Test(), 10000L);
             locks.add(lockDO);
         }
         omsLockRepository.saveAll(locks);
@@ -63,7 +62,7 @@ public class RepositoryTest {
     @Test
     public void testDeleteLock() {
         String lockName = "test-lock";
-        OmsLockDO lockDO = new OmsLockDO(lockName, NetUtils.getLocalHost(), 10000L);
+        OmsLockDO lockDO = new OmsLockDO(lockName, NetUtils.getLocalHost4Test(), 10000L);
         omsLockRepository.save(lockDO);
         omsLockRepository.deleteByLockName(lockName);
     }

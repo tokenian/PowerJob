@@ -3,8 +3,10 @@ package tech.powerjob.server.core.instance;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import tech.powerjob.common.PowerQuery;
 import tech.powerjob.common.RemoteConstant;
 import tech.powerjob.common.SystemInstanceResult;
 import tech.powerjob.common.enums.InstanceStatus;
@@ -12,8 +14,10 @@ import tech.powerjob.common.exception.PowerJobException;
 import tech.powerjob.common.model.InstanceDetail;
 import tech.powerjob.common.request.ServerQueryInstanceStatusReq;
 import tech.powerjob.common.request.ServerStopInstanceReq;
+import tech.powerjob.common.request.query.InstancePageQuery;
 import tech.powerjob.common.response.AskResponse;
 import tech.powerjob.common.response.InstanceInfoDTO;
+import tech.powerjob.common.response.PageResult;
 import tech.powerjob.remote.framework.base.URL;
 import tech.powerjob.server.common.constants.InstanceType;
 import tech.powerjob.server.common.module.WorkerInfo;
@@ -27,8 +31,8 @@ import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 import tech.powerjob.server.persistence.remote.repository.InstanceInfoRepository;
 import tech.powerjob.server.persistence.remote.repository.JobInfoRepository;
 import tech.powerjob.server.remote.server.redirector.DesignateServer;
-import tech.powerjob.server.remote.transporter.impl.ServerURLFactory;
 import tech.powerjob.server.remote.transporter.TransportService;
+import tech.powerjob.server.remote.transporter.impl.ServerURLFactory;
 import tech.powerjob.server.remote.worker.WorkerClusterQueryService;
 
 import java.util.Date;
@@ -229,12 +233,21 @@ public class InstanceService {
         }
     }
 
-    public List<InstanceInfoDTO> queryInstanceInfo(PowerQuery powerQuery) {
-        return instanceInfoRepository
-                .findAll(QueryConvertUtils.toSpecification(powerQuery))
-                .stream()
-                .map(InstanceService::directConvert)
-                .collect(Collectors.toList());
+    public PageResult<InstanceInfoDTO> queryInstanceInfo(InstancePageQuery instancePageQuery) {
+        Specification<InstanceInfoDO> specification = QueryConvertUtils.toSpecification(instancePageQuery);
+        Pageable pageable = QueryConvertUtils.toPageable(instancePageQuery);
+        Page<InstanceInfoDO> instanceInfoDOPage = instanceInfoRepository.findAll(specification, pageable);
+
+        PageResult<InstanceInfoDTO> ret = new PageResult<>();
+        List<InstanceInfoDTO> instanceInfoDTOList = instanceInfoDOPage.get().map(InstanceService::directConvert).collect(Collectors.toList());
+
+        ret.setData(instanceInfoDTOList)
+                .setIndex(instanceInfoDOPage.getNumber())
+                .setPageSize(instanceInfoDOPage.getSize())
+                .setTotalPages(instanceInfoDOPage.getTotalPages())
+                .setTotalItems(instanceInfoDOPage.getTotalElements());
+
+        return ret;
     }
 
     /**
@@ -261,10 +274,12 @@ public class InstanceService {
     /**
      * 获取任务实例的详细运行详细
      *
+     * @param appId 用于远程 server 路由，勿删！
      * @param instanceId 任务实例ID
      * @return 详细运行状态
      */
-    public InstanceDetail getInstanceDetail(Long instanceId) {
+    @DesignateServer
+    public InstanceDetail getInstanceDetail(Long appId, Long instanceId, String customQuery) {
 
         InstanceInfoDO instanceInfoDO = fetchInstanceInfo(instanceId);
 
@@ -282,7 +297,7 @@ public class InstanceService {
         Optional<WorkerInfo> workerInfoOpt = workerClusterQueryService.getWorkerInfoByAddress(instanceInfoDO.getAppId(), instanceInfoDO.getTaskTrackerAddress());
         if (workerInfoOpt.isPresent()) {
             WorkerInfo workerInfo = workerInfoOpt.get();
-            ServerQueryInstanceStatusReq req = new ServerQueryInstanceStatusReq(instanceId);
+            ServerQueryInstanceStatusReq req = new ServerQueryInstanceStatusReq(instanceId, customQuery);
             try {
                 final URL url = ServerURLFactory.queryInstance2Worker(workerInfo.getAddress());
                 AskResponse askResponse = transportService.ask(workerInfo.getProtocol(), url, req, AskResponse.class)

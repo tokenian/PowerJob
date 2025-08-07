@@ -1,8 +1,9 @@
 package tech.powerjob.common.serialize;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,19 @@ public class JsonUtils {
             .configure(MapperFeature.PROPAGATE_TRANSIENT_MARKER, true)
             .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
             .configure(JsonParser.Feature.IGNORE_UNDEFINED, true)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .build();
+
+    static {
+        JSON_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        // 非核心功能可降级，尽可能降低依赖冲突概率
+        try {
+            JSON_MAPPER.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
+        } catch (Exception e) {
+            log.warn("[JsonUtils] registerJavaTimeModule failed, PowerJob can't process Java 8 date/time type now!", e);
+        }
+    }
 
     private static final TypeReference<Map<String, Object>>  MAP_TYPE_REFERENCE  = new TypeReference<Map<String, Object>> () {};
 
@@ -37,6 +50,9 @@ public class JsonUtils {
     }
 
     public static String toJSONString(Object obj) {
+        if (obj == null) {
+            return null;
+        }
         if (obj instanceof String) {
             return (String) obj;
         }
@@ -55,8 +71,9 @@ public class JsonUtils {
         try {
             return JSON_MAPPER.writeValueAsString(obj);
         }catch (Exception e) {
-            throw new PowerJobException(e);
+            ExceptionUtils.rethrow(e);
         }
+        throw new ImpossibleException();
     }
 
     public static byte[] toBytes(Object obj) {
@@ -68,7 +85,7 @@ public class JsonUtils {
         return null;
     }
 
-    public static <T> T parseObject(String json, Class<T> clz) throws JsonProcessingException {
+    public static <T> T parseObject(String json, Class<T> clz) throws Exception {
         return JSON_MAPPER.readValue(json, clz);
     }
 

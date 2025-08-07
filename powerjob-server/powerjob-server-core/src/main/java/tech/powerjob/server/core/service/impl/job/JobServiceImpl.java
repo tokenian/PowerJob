@@ -19,7 +19,7 @@ import tech.powerjob.common.request.http.SaveJobInfoRequest;
 import tech.powerjob.common.response.JobInfoDTO;
 import tech.powerjob.common.serialize.JsonUtils;
 import tech.powerjob.server.common.SJ;
-import tech.powerjob.server.common.constants.SwitchableStatus;
+import tech.powerjob.common.enums.SwitchableStatus;
 import tech.powerjob.server.common.timewheel.holder.InstanceTimeWheelService;
 import tech.powerjob.server.core.DispatchService;
 import tech.powerjob.server.core.instance.InstanceService;
@@ -116,6 +116,10 @@ public class JobServiceImpl implements JobService {
         // 日志配置
         if (request.getLogConfig() != null) {
             jobInfoDO.setLogConfig(JSONObject.toJSONString(request.getLogConfig()));
+        }
+        // 日志配置
+        if (request.getAdvancedRuntimeConfig() != null) {
+            jobInfoDO.setAdvancedRuntimeConfig(JSONObject.toJSONString(request.getAdvancedRuntimeConfig()));
         }
         JobInfoDO res = jobInfoRepository.saveAndFlush(jobInfoDO);
         return res.getId();

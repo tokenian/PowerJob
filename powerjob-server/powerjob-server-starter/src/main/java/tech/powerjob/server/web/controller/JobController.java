@@ -4,7 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import tech.powerjob.common.request.http.SaveJobInfoRequest;
 import tech.powerjob.common.response.ResultDTO;
-import tech.powerjob.server.common.constants.SwitchableStatus;
+import tech.powerjob.server.auth.Permission;
+import tech.powerjob.server.auth.RoleScope;
+import tech.powerjob.server.auth.interceptor.ApiPermission;
+import tech.powerjob.common.enums.SwitchableStatus;
 import tech.powerjob.server.persistence.PageResult;
 import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 import tech.powerjob.server.persistence.remote.repository.JobInfoRepository;
@@ -41,12 +44,13 @@ public class JobController {
     private JobInfoRepository jobInfoRepository;
 
     @PostMapping("/save")
+    @ApiPermission(name = "Job-Save", roleScope = RoleScope.APP, requiredPermission = Permission.WRITE)
     public ResultDTO<Void> saveJobInfo(@RequestBody SaveJobInfoRequest request) {
         jobService.saveJob(request);
-
         return ResultDTO.success(null);
     }
 
+    @ApiPermission(name = "Job-Save", roleScope = RoleScope.APP, requiredPermission = Permission.WRITE)
     @PostMapping("/batchSave")
     public ResultDTO<Void> saveJobInfo(@RequestBody List<SaveJobInfoRequest> requests) {
         jobService.saveJob(requests);
@@ -55,33 +59,39 @@ public class JobController {
     }
 
     @PostMapping("/copy")
+    @ApiPermission(name = "Job-Copy", roleScope = RoleScope.APP, requiredPermission = Permission.WRITE)
     public ResultDTO<JobInfoVO> copyJob(String jobId) {
         return ResultDTO.success(JobInfoVO.from(jobService.copyJob(Long.valueOf(jobId))));
     }
 
     @GetMapping("/export")
+    @ApiPermission(name = "Job-Export", roleScope = RoleScope.APP, requiredPermission = Permission.READ)
     public ResultDTO<List<SaveJobInfoRequest>> exportJob(Long[] jobIdList) {
         return ResultDTO.success(jobService.exportJob(Arrays.asList(jobIdList)));
     }
 
     @GetMapping("/disable")
+    @ApiPermission(name = "Job-Disable", roleScope = RoleScope.APP, requiredPermission = Permission.WRITE)
     public ResultDTO<Void> disableJob(String jobId) {
         jobService.disableJob(Long.valueOf(jobId));
         return ResultDTO.success(null);
     }
 
     @GetMapping("/delete")
+    @ApiPermission(name = "Job-Delete", roleScope = RoleScope.APP, requiredPermission = Permission.WRITE)
     public ResultDTO<Void> deleteJob(String jobId) {
         jobService.deleteJob(Long.valueOf(jobId));
         return ResultDTO.success(null);
     }
 
     @GetMapping("/run")
+    @ApiPermission(name = "Job-Copy", roleScope = RoleScope.APP, requiredPermission = Permission.OPS)
     public ResultDTO<Long> runImmediately(String appId, String jobId, @RequestParam(required = false) String instanceParams) {
         return ResultDTO.success(jobService.runJob(Long.valueOf(appId), Long.valueOf(jobId), instanceParams, 0L));
     }
 
     @PostMapping("/list")
+    @ApiPermission(name = "Job-Copy", roleScope = RoleScope.APP, requiredPermission = Permission.READ)
     public ResultDTO<PageResult<JobInfoVO>> listJobs(@RequestBody QueryJobInfoRequest request) {
 
         Sort sort = Sort.by(Sort.Direction.ASC, "id");

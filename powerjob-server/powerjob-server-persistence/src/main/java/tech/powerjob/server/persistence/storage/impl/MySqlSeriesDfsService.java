@@ -17,8 +17,7 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.core.env.Environment;
 import tech.powerjob.common.serialize.JsonUtils;
 import tech.powerjob.common.utils.CommonUtils;
-import tech.powerjob.common.utils.NetUtils;
-import tech.powerjob.server.common.constants.SwitchableStatus;
+import tech.powerjob.common.enums.SwitchableStatus;
 import tech.powerjob.server.common.spring.condition.PropertyAndOneBeanCondition;
 import tech.powerjob.server.extension.dfs.*;
 import tech.powerjob.server.persistence.storage.AbstractDFsService;
@@ -139,8 +138,9 @@ public class MySqlSeriesDfsService extends AbstractDFsService {
         deleteByLocation(fileLocation);
 
         Map<String, Object> meta = Maps.newHashMap();
-        meta.put("_server_", NetUtils.getLocalHost());
+        meta.put("_server_", serverInfo.getIp());
         meta.put("_local_file_path_", storeRequest.getLocalFile().getAbsolutePath());
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(Files.newInputStream(storeRequest.getLocalFile().toPath()));
 
         Date date = new Date(System.currentTimeMillis());
 
@@ -153,7 +153,7 @@ public class MySqlSeriesDfsService extends AbstractDFsService {
             pst.setString(4, JsonUtils.toJSONString(meta));
             pst.setLong(5, storeRequest.getLocalFile().length());
             pst.setInt(6, SwitchableStatus.ENABLE.getV());
-            pst.setBlob(7, new BufferedInputStream(Files.newInputStream(storeRequest.getLocalFile().toPath())));
+            pst.setBlob(7, bufferedInputStream);
             pst.setString(8, null);
             pst.setDate(9, date);
             pst.setDate(10, date);
@@ -165,6 +165,8 @@ public class MySqlSeriesDfsService extends AbstractDFsService {
         } catch (Exception e) {
             log.error("[MySqlSeriesDfsService] store [{}] failed!", fileLocation);
             ExceptionUtils.rethrow(e);
+        }finally {
+            bufferedInputStream.close();
         }
     }
 
