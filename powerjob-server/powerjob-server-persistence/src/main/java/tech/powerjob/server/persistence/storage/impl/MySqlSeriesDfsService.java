@@ -22,7 +22,7 @@ import tech.powerjob.server.common.spring.condition.PropertyAndOneBeanCondition;
 import tech.powerjob.server.extension.dfs.*;
 import tech.powerjob.server.persistence.storage.AbstractDFsService;
 
-import javax.annotation.Priority;
+import jakarta.annotation.Priority;
 import javax.sql.DataSource;
 import java.io.BufferedInputStream;
 import java.io.IOException;

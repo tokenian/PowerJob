@@ -9,7 +9,7 @@ import tech.powerjob.common.exception.PowerJobException;
 import tech.powerjob.common.utils.PropertyUtils;
 import tech.powerjob.server.core.scheduler.auxiliary.AbstractTimingStrategyHandler;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.time.Duration;
 
 /**

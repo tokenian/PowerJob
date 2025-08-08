@@ -2,7 +2,7 @@ package tech.powerjob.server.auth.common.utils;
 
 import tech.powerjob.common.OmsConstant;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * HttpServletUtils

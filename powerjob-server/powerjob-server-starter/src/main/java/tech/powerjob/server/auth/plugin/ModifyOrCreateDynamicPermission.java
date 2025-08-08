@@ -6,7 +6,7 @@ import tech.powerjob.common.serialize.JsonUtils;
 import tech.powerjob.server.auth.Permission;
 import tech.powerjob.server.auth.interceptor.DynamicPermissionPlugin;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**

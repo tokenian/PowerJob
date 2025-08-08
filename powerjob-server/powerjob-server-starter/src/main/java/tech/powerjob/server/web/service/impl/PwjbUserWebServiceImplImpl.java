@@ -18,7 +18,7 @@ import tech.powerjob.server.web.request.ChangePasswordRequest;
 import tech.powerjob.server.web.request.ModifyUserInfoRequest;
 import tech.powerjob.server.web.service.PwjbUserWebService;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;

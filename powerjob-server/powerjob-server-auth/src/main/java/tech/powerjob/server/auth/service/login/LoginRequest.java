@@ -3,7 +3,7 @@ package tech.powerjob.server.auth.service.login;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 执行登录的请求

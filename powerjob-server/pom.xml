@@ -27,8 +27,6 @@
 
 
     <properties>
-        <springboot.version>2.7.18</springboot.version>
-
         <!-- MySQL version that corresponds to spring-boot-dependencies version. -->
         <mysql.version>8.0.33</mysql.version>
         <ojdbc.version>19.7.0.0</ojdbc.version>

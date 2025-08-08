@@ -14,7 +14,7 @@ import tech.powerjob.server.auth.service.WebAuthService;
 import tech.powerjob.server.auth.service.permission.PowerJobPermissionService;
 import tech.powerjob.server.web.request.ComponentUserRoleInfo;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.*;
 
 /**

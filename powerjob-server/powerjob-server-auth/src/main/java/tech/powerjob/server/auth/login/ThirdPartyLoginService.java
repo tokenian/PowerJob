@@ -1,6 +1,6 @@
 package tech.powerjob.server.auth.login;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 第三方登录服务

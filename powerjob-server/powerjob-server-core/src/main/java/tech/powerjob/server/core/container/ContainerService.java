@@ -50,9 +50,9 @@ import tech.powerjob.server.remote.transporter.impl.ServerURLFactory;
 import tech.powerjob.server.remote.transporter.TransportService;
 import tech.powerjob.server.remote.worker.WorkerClusterQueryService;
 
-import javax.annotation.Resource;
-import javax.websocket.RemoteEndpoint;
-import javax.websocket.Session;
+import jakarta.annotation.Resource;
+import jakarta.websocket.RemoteEndpoint;
+import jakarta.websocket.Session;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;

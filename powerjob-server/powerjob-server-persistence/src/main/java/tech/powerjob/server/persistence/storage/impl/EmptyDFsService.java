@@ -7,7 +7,7 @@ import tech.powerjob.server.extension.dfs.*;
 import tech.powerjob.server.persistence.storage.AbstractDFsService;
 import tech.powerjob.server.common.spring.condition.PropertyAndOneBeanCondition;
 
-import javax.annotation.Priority;
+import jakarta.annotation.Priority;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;

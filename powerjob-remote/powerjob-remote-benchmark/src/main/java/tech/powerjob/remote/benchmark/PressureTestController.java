@@ -12,7 +12,7 @@ import tech.powerjob.remote.framework.base.Address;
 import tech.powerjob.remote.framework.base.HandlerLocation;
 import tech.powerjob.remote.framework.base.URL;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import java.util.concurrent.CompletionStage;
 

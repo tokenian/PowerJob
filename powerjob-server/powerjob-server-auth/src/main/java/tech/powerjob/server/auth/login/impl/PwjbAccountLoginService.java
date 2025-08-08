@@ -14,8 +14,8 @@ import tech.powerjob.common.utils.DigestUtils;
 import tech.powerjob.server.persistence.remote.model.PwjbUserInfoDO;
 import tech.powerjob.server.persistence.remote.repository.PwjbUserInfoRepository;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Optional;
 

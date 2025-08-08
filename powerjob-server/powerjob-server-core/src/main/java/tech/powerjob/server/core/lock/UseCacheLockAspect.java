@@ -15,7 +15,7 @@ import tech.powerjob.server.common.utils.AOPUtils;
 import tech.powerjob.server.monitor.MonitorService;
 import tech.powerjob.server.monitor.events.lock.SlowLockEvent;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

@@ -4,7 +4,7 @@ import tech.powerjob.common.utils.CommonUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.util.DigestUtils;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 

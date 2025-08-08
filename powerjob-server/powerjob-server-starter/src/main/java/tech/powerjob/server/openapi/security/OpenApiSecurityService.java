@@ -3,7 +3,7 @@ package tech.powerjob.server.openapi.security;
 import tech.powerjob.client.module.AppAuthRequest;
 import tech.powerjob.client.module.AppAuthResult;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * OPENAPI 安全服务

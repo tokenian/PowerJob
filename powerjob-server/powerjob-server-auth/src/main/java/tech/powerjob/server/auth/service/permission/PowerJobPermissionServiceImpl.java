@@ -11,7 +11,7 @@ import tech.powerjob.server.persistence.remote.model.UserRoleDO;
 import tech.powerjob.server.persistence.remote.repository.AppInfoRepository;
 import tech.powerjob.server.persistence.remote.repository.UserRoleRepository;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.*;
 
 /**

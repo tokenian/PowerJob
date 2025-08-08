@@ -18,7 +18,7 @@ import tech.powerjob.server.extension.alarm.AlarmTarget;
 import tech.powerjob.server.extension.alarm.Alarmable;
 import tech.powerjob.server.extension.alarm.Alarm;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Set;
 

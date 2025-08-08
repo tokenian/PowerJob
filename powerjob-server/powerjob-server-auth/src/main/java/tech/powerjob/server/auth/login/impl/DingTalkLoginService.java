@@ -15,7 +15,7 @@ import tech.powerjob.server.auth.common.AuthConstants;
 import tech.powerjob.server.auth.login.*;
 import tech.powerjob.server.common.Loggers;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 

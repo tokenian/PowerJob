@@ -1,15 +1,11 @@
 package tech.powerjob.server.core.scheduler.auxiliary.impl;
 
 import org.springframework.boot.convert.ApplicationConversionService;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
-import tech.powerjob.common.PowerJobDKey;
 import tech.powerjob.common.enums.TimeExpressionType;
 import tech.powerjob.common.exception.PowerJobException;
-import tech.powerjob.common.utils.PropertyUtils;
 import tech.powerjob.server.core.scheduler.auxiliary.AbstractTimingStrategyHandler;
 
-import javax.annotation.Resource;
 import java.time.Duration;
 
 

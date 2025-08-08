@@ -12,7 +12,7 @@ import tech.powerjob.common.PowerQuery;
 import tech.powerjob.common.exception.PowerJobException;
 import tech.powerjob.common.request.query.PowerPageQuery;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import java.lang.reflect.Field;
 import java.util.List;
 

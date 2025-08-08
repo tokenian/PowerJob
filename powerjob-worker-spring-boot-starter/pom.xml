@@ -15,7 +15,6 @@
 
     <properties>
         <powerjob.worker.version>5.1.1</powerjob.worker.version>
-        <springboot.version>2.7.18</springboot.version>
     </properties>
 
     <dependencies>
@@ -23,7 +22,7 @@
         <dependency>
             <groupId>tech.powerjob</groupId>
             <artifactId>powerjob-worker</artifactId>
-            <version>${powerjob.worker.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>

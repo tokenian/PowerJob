@@ -14,9 +14,9 @@ import tech.powerjob.common.response.PowerResultDTO;
 import tech.powerjob.common.serialize.JsonUtils;
 import tech.powerjob.server.openapi.security.OpenApiSecurityService;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Set;
 

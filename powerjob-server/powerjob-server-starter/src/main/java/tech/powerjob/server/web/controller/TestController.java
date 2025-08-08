@@ -15,7 +15,7 @@ import tech.powerjob.server.core.alarm.AlarmCenter;
 import tech.powerjob.server.core.alarm.module.JobInstanceAlarm;
 import tech.powerjob.server.extension.alarm.AlarmTarget;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.Map;
 
 /**

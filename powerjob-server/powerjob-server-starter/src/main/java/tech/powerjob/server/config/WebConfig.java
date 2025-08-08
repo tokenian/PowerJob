@@ -11,7 +11,7 @@ import tech.powerjob.common.OpenAPIConstant;
 import tech.powerjob.server.auth.interceptor.PowerJobAuthInterceptor;
 import tech.powerjob.server.openapi.OpenApiInterceptor;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * CORS

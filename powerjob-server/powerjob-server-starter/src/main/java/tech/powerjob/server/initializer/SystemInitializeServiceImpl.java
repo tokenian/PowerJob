@@ -21,8 +21,8 @@ import tech.powerjob.server.web.request.ModifyUserInfoRequest;
 import tech.powerjob.server.web.service.NamespaceWebService;
 import tech.powerjob.server.web.service.PwjbUserWebService;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
+import jakarta.annotation.Resource;
+import jakarta.transaction.Transactional;
 import java.util.Map;
 
 /**

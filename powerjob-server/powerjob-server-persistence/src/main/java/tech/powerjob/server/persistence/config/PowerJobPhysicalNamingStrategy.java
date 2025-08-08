@@ -1,10 +1,9 @@
 package tech.powerjob.server.persistence.config;
-
+import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import tech.powerjob.server.common.PowerJobServerConfigKey;
 import tech.powerjob.server.common.utils.PropertyUtils;
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
-import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -22,7 +21,7 @@ import java.io.Serializable;
  * @author songyinyin
  * @since 2020/7/18
  */
-public class PowerJobPhysicalNamingStrategy extends SpringPhysicalNamingStrategy implements Serializable {
+public class PowerJobPhysicalNamingStrategy extends PhysicalNamingStrategyStandardImpl implements Serializable {
 
 
     /**

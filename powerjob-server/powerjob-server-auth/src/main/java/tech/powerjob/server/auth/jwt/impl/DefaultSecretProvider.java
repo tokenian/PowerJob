@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import tech.powerjob.server.auth.jwt.SecretProvider;
 import tech.powerjob.common.utils.DigestUtils;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * PowerJob 默认实现

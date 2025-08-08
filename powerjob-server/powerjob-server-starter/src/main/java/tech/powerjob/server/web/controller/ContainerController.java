@@ -24,7 +24,7 @@ import tech.powerjob.server.web.request.GenerateContainerTemplateRequest;
 import tech.powerjob.server.web.request.SaveContainerInfoRequest;
 import tech.powerjob.server.web.response.ContainerInfoVO;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
