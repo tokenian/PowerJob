@@ -1,6 +1,6 @@
+import org.junit.jupiter.api.Test;
 import tech.powerjob.common.PowerJobDKey;
 import tech.powerjob.common.utils.NetUtils;
-import org.junit.jupiter.api.Test;
 
 /**
  * NetUtilsTest

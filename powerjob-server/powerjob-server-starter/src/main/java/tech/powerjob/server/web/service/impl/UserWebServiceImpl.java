@@ -3,6 +3,8 @@ package tech.powerjob.server.web.service.impl;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
+import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,6 @@ import tech.powerjob.server.web.request.QueryUserRequest;
 import tech.powerjob.server.web.response.UserBaseVO;
 import tech.powerjob.server.web.service.UserWebService;
 
-import jakarta.annotation.Resource;
-import jakarta.persistence.criteria.Predicate;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;

@@ -1,7 +1,7 @@
 package tech.powerjob.common.request;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.Data;
+import tech.powerjob.common.PowerSerializable;
 
 import java.util.Map;
 

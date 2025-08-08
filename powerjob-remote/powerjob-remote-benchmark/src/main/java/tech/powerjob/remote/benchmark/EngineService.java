@@ -1,6 +1,7 @@
 package tech.powerjob.remote.benchmark;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 import tech.powerjob.common.enums.Protocol;
@@ -10,8 +11,6 @@ import tech.powerjob.remote.framework.base.ServerType;
 import tech.powerjob.remote.framework.engine.EngineConfig;
 import tech.powerjob.remote.framework.engine.impl.PowerJobRemoteEngine;
 import tech.powerjob.remote.framework.transporter.Transporter;
-
-import jakarta.annotation.PostConstruct;
 
 /**
  * EngineService

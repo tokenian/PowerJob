@@ -1,21 +1,21 @@
 package tech.powerjob.server.auth.login.impl;
 
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import tech.powerjob.common.enums.ErrorCodes;
 import tech.powerjob.common.exception.PowerJobException;
 import tech.powerjob.common.serialize.JsonUtils;
+import tech.powerjob.common.utils.DigestUtils;
 import tech.powerjob.server.auth.common.AuthConstants;
-import tech.powerjob.common.enums.ErrorCodes;
 import tech.powerjob.server.auth.common.PowerJobAuthException;
 import tech.powerjob.server.auth.login.*;
 import tech.powerjob.server.common.Loggers;
-import tech.powerjob.common.utils.DigestUtils;
 import tech.powerjob.server.persistence.remote.model.PwjbUserInfoDO;
 import tech.powerjob.server.persistence.remote.repository.PwjbUserInfoRepository;
 
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Optional;
 

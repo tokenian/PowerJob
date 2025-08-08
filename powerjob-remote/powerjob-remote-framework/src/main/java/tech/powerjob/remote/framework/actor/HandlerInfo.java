@@ -6,7 +6,6 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import tech.powerjob.remote.framework.base.HandlerLocation;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 
 /**

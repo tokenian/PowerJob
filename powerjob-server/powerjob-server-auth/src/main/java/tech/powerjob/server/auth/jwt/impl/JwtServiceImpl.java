@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -13,7 +14,6 @@ import tech.powerjob.server.auth.jwt.JwtService;
 import tech.powerjob.server.auth.jwt.ParseResult;
 import tech.powerjob.server.auth.jwt.SecretProvider;
 
-import jakarta.annotation.Resource;
 import java.security.Key;
 import java.util.Date;
 import java.util.Map;

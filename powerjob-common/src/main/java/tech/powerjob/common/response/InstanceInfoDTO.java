@@ -1,7 +1,7 @@
 package tech.powerjob.common.response;
 
-import tech.powerjob.common.enums.InstanceStatus;
 import lombok.Data;
+import tech.powerjob.common.enums.InstanceStatus;
 
 import java.util.Date;
 

@@ -1,10 +1,10 @@
 package tech.powerjob.common.request;
 
-import tech.powerjob.common.PowerSerializable;
-import tech.powerjob.common.model.InstanceLogContent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.powerjob.common.PowerSerializable;
+import tech.powerjob.common.model.InstanceLogContent;
 
 import java.util.List;
 

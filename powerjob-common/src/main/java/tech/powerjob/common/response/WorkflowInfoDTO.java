@@ -1,7 +1,7 @@
 package tech.powerjob.common.response;
 
-import tech.powerjob.common.model.PEWorkflowDAG;
 import lombok.Data;
+import tech.powerjob.common.model.PEWorkflowDAG;
 
 import java.util.Date;
 

@@ -1,16 +1,16 @@
 package tech.powerjob.common.request.http;
 
+import lombok.Data;
 import tech.powerjob.common.enums.DispatchStrategy;
 import tech.powerjob.common.enums.ExecuteType;
 import tech.powerjob.common.enums.ProcessorType;
 import tech.powerjob.common.enums.TimeExpressionType;
 import tech.powerjob.common.model.AlarmConfig;
 import tech.powerjob.common.model.JobAdvancedRuntimeConfig;
-import tech.powerjob.common.model.LogConfig;
 import tech.powerjob.common.model.LifeCycle;
-import tech.powerjob.common.utils.CommonUtils;
-import lombok.Data;
+import tech.powerjob.common.model.LogConfig;
 import tech.powerjob.common.response.JobInfoDTO;
+import tech.powerjob.common.utils.CommonUtils;
 
 import java.util.List;
 

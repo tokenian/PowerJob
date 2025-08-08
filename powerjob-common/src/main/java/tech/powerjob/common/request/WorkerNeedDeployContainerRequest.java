@@ -1,9 +1,9 @@
 package tech.powerjob.common.request;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.powerjob.common.PowerSerializable;
 
 /**
  * Worker需要部署容器，主动向Server请求信息

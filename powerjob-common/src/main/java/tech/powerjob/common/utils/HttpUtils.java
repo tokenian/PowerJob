@@ -1,7 +1,7 @@
 package tech.powerjob.common.utils;
 
-import tech.powerjob.common.exception.PowerJobException;
 import okhttp3.*;
+import tech.powerjob.common.exception.PowerJobException;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

@@ -1,5 +1,6 @@
 package tech.powerjob.remote.benchmark;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -11,8 +12,6 @@ import tech.powerjob.remote.framework.BenchmarkActor;
 import tech.powerjob.remote.framework.base.Address;
 import tech.powerjob.remote.framework.base.HandlerLocation;
 import tech.powerjob.remote.framework.base.URL;
-
-import jakarta.annotation.Resource;
 
 import java.util.concurrent.CompletionStage;
 

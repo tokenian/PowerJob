@@ -1,9 +1,9 @@
 package tech.powerjob.common.request.query;
 
-import tech.powerjob.common.PowerQuery;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import tech.powerjob.common.PowerQuery;
 
 import java.util.Date;
 import java.util.List;

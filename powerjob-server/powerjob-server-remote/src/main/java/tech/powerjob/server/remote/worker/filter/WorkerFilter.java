@@ -1,7 +1,7 @@
 package tech.powerjob.server.remote.worker.filter;
 
-import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 import tech.powerjob.server.common.module.WorkerInfo;
+import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 
 /**
  * filter worker by system metrics or other info

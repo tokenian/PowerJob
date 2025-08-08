@@ -1,9 +1,9 @@
 package tech.powerjob.common.request;
 
+import lombok.Data;
 import tech.powerjob.common.PowerSerializable;
 import tech.powerjob.common.model.DeployedContainerInfo;
 import tech.powerjob.common.model.SystemMetrics;
-import lombok.Data;
 
 import java.util.List;
 

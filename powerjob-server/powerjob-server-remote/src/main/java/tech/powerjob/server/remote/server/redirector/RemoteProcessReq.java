@@ -1,9 +1,9 @@
 package tech.powerjob.server.remote.server.redirector;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import tech.powerjob.common.PowerSerializable;
 
 /**
  * 原创执行命令

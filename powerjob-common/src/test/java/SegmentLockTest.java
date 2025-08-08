@@ -1,5 +1,5 @@
-import tech.powerjob.common.utils.SegmentLock;
 import org.junit.jupiter.api.Test;
+import tech.powerjob.common.utils.SegmentLock;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

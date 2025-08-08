@@ -1,6 +1,8 @@
 package tech.powerjob.server.web.service.impl;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
+import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -25,8 +27,6 @@ import tech.powerjob.server.web.request.ModifyNamespaceRequest;
 import tech.powerjob.server.web.request.QueryNamespaceRequest;
 import tech.powerjob.server.web.service.NamespaceWebService;
 
-import jakarta.annotation.Resource;
-import jakarta.persistence.criteria.Predicate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

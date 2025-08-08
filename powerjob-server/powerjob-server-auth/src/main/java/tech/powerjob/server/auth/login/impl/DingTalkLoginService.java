@@ -6,16 +6,19 @@ import com.aliyun.dingtalkoauth2_1_0.models.GetUserTokenRequest;
 import com.aliyun.dingtalkoauth2_1_0.models.GetUserTokenResponse;
 import com.aliyun.teaopenapi.models.Config;
 import com.aliyun.teautil.models.RuntimeOptions;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.powerjob.common.exception.PowerJobException;
 import tech.powerjob.server.auth.common.AuthConstants;
-import tech.powerjob.server.auth.login.*;
+import tech.powerjob.server.auth.login.LoginTypeInfo;
+import tech.powerjob.server.auth.login.ThirdPartyLoginRequest;
+import tech.powerjob.server.auth.login.ThirdPartyLoginService;
+import tech.powerjob.server.auth.login.ThirdPartyUser;
 import tech.powerjob.server.common.Loggers;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 

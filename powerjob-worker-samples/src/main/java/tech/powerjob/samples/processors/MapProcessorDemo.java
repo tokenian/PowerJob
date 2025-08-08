@@ -1,17 +1,17 @@
 package tech.powerjob.samples.processors;
 
+import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 import tech.powerjob.common.serialize.JsonUtils;
 import tech.powerjob.samples.MysteryService;
 import tech.powerjob.worker.core.processor.ProcessResult;
 import tech.powerjob.worker.core.processor.TaskContext;
 import tech.powerjob.worker.core.processor.sdk.MapProcessor;
-import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 

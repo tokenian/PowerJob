@@ -1,6 +1,7 @@
 package tech.powerjob.server.auth.service.permission;
 
 import com.google.common.collect.*;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tech.powerjob.server.auth.Permission;
@@ -11,7 +12,6 @@ import tech.powerjob.server.persistence.remote.model.UserRoleDO;
 import tech.powerjob.server.persistence.remote.repository.AppInfoRepository;
 import tech.powerjob.server.persistence.remote.repository.UserRoleRepository;
 
-import jakarta.annotation.Resource;
 import java.util.*;
 
 /**

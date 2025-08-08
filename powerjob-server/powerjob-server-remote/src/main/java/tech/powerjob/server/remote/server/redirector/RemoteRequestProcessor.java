@@ -1,8 +1,8 @@
 package tech.powerjob.server.remote.server.redirector;
 
 import com.alibaba.fastjson.JSONObject;
-import tech.powerjob.server.common.utils.SpringUtils;
 import org.springframework.util.ReflectionUtils;
+import tech.powerjob.server.common.utils.SpringUtils;
 
 import java.lang.reflect.Method;
 

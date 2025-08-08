@@ -1,6 +1,5 @@
 package tech.powerjob.server.monitor.events.w2s;
 
-import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import tech.powerjob.server.common.SJ;

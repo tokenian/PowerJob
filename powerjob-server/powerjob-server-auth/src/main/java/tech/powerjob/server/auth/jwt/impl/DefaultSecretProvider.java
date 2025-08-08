@@ -1,13 +1,12 @@
 package tech.powerjob.server.auth.jwt.impl;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import tech.powerjob.server.auth.jwt.SecretProvider;
 import tech.powerjob.common.utils.DigestUtils;
-
-import jakarta.annotation.Resource;
+import tech.powerjob.server.auth.jwt.SecretProvider;
 
 /**
  * PowerJob 默认实现

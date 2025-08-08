@@ -1,7 +1,6 @@
 package tech.powerjob.official.processors.impl.sql;
 
 import com.alibaba.fastjson.JSON;
-import tech.powerjob.worker.core.processor.ProcessResult;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +9,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import tech.powerjob.official.processors.TestUtils;
+import tech.powerjob.worker.core.processor.ProcessResult;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;

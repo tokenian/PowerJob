@@ -1,9 +1,9 @@
 package tech.powerjob.server.web.request;
 
+import lombok.Data;
+import tech.powerjob.common.enums.SwitchableStatus;
 import tech.powerjob.common.utils.CommonUtils;
 import tech.powerjob.server.common.constants.ContainerSourceType;
-import tech.powerjob.common.enums.SwitchableStatus;
-import lombok.Data;
 
 /**
  * 保存/修改 容器 请求

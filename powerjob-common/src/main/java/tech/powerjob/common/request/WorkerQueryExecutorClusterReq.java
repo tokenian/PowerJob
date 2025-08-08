@@ -1,9 +1,9 @@
 package tech.powerjob.common.request;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.powerjob.common.PowerSerializable;
 
 /**
  * worker 查询 执行器集群（动态上线需要）

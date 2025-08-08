@@ -1,10 +1,10 @@
 package tech.powerjob.server.remote.worker.filter;
 
-import tech.powerjob.common.model.SystemMetrics;
-import tech.powerjob.server.persistence.remote.model.JobInfoDO;
-import tech.powerjob.server.common.module.WorkerInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import tech.powerjob.common.model.SystemMetrics;
+import tech.powerjob.server.common.module.WorkerInfo;
+import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 
 /**
  * filter worker by system metric

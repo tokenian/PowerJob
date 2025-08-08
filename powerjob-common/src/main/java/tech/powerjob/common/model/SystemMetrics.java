@@ -1,7 +1,7 @@
 package tech.powerjob.common.model;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.Data;
+import tech.powerjob.common.PowerSerializable;
 
 /**
  * Class for system metrics.

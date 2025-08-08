@@ -1,13 +1,13 @@
 package tech.powerjob.samples.processors;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import tech.powerjob.common.utils.NetUtils;
 import tech.powerjob.worker.core.processor.ProcessResult;
 import tech.powerjob.worker.core.processor.TaskContext;
 import tech.powerjob.worker.core.processor.TaskResult;
 import tech.powerjob.worker.core.processor.sdk.BroadcastProcessor;
 import tech.powerjob.worker.log.OmsLogger;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

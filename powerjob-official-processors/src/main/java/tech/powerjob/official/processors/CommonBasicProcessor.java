@@ -1,14 +1,14 @@
 package tech.powerjob.official.processors;
 
+import com.google.common.base.Stopwatch;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import tech.powerjob.official.processors.util.CommonUtils;
 import tech.powerjob.official.processors.util.SecurityUtils;
 import tech.powerjob.worker.core.processor.ProcessResult;
 import tech.powerjob.worker.core.processor.TaskContext;
 import tech.powerjob.worker.core.processor.sdk.BasicProcessor;
 import tech.powerjob.worker.log.OmsLogger;
-import com.google.common.base.Stopwatch;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import tech.powerjob.official.processors.util.CommonUtils;
 
 /**
  * CommonBasicProcessor

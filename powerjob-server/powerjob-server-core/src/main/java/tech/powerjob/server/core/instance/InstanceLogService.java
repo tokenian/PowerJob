@@ -3,6 +3,7 @@ package tech.powerjob.server.core.instance;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -32,7 +33,6 @@ import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 import tech.powerjob.server.persistence.storage.Constants;
 import tech.powerjob.server.remote.server.redirector.DesignateServer;
 
-import jakarta.annotation.Resource;
 import java.io.*;
 import java.util.List;
 import java.util.Map;

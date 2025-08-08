@@ -1,14 +1,14 @@
 package tech.powerjob.server.core.lock;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 import tech.powerjob.common.utils.CommonUtils;
 import tech.powerjob.common.utils.NetUtils;
 import tech.powerjob.server.extension.LockService;
 import tech.powerjob.server.persistence.remote.model.OmsLockDO;
 import tech.powerjob.server.persistence.remote.repository.OmsLockRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
 
 /**
  * 基于数据库实现的分布式锁

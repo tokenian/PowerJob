@@ -1,9 +1,9 @@
 package tech.powerjob.common.request;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.powerjob.common.PowerSerializable;
 
 /**
  * 服务器销毁容器请求

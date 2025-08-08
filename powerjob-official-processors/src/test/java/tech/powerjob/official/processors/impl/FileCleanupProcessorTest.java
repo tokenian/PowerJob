@@ -2,13 +2,13 @@ package tech.powerjob.official.processors.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import tech.powerjob.worker.core.processor.TaskContext;
 import org.junit.jupiter.api.Test;
 import tech.powerjob.official.processors.TestUtils;
+import tech.powerjob.worker.core.processor.TaskContext;
 
 import java.util.regex.Pattern;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * test FileCleanupProcessor

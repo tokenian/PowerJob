@@ -7,11 +7,11 @@ import com.dingtalk.api.request.OapiMessageCorpconversationAsyncsendV2Request;
 import com.dingtalk.api.request.OapiUserGetByMobileRequest;
 import com.dingtalk.api.response.OapiGettokenResponse;
 import com.dingtalk.api.response.OapiUserGetByMobileResponse;
-import tech.powerjob.common.exception.PowerJobException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpMethod;
+import tech.powerjob.common.exception.PowerJobException;
 
 import java.io.Closeable;
 import java.io.IOException;

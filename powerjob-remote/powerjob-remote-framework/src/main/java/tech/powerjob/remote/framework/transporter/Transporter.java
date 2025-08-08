@@ -5,7 +5,6 @@ import tech.powerjob.remote.framework.base.RemotingException;
 import tech.powerjob.remote.framework.base.URL;
 
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.ExecutorService;
 
 /**
  * 通讯器，封装与远程服务端交互逻辑

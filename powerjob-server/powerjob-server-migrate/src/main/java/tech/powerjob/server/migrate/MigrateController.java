@@ -1,14 +1,13 @@
 package tech.powerjob.server.migrate;
 
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import tech.powerjob.common.response.ResultDTO;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.annotation.Resource;
+import tech.powerjob.common.response.ResultDTO;
 
 /**
  * Help users upgrade from a low version of powerjob-server to a high version of powerjob-server

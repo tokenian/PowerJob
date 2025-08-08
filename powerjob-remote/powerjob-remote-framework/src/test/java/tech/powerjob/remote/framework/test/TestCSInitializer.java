@@ -2,7 +2,6 @@ package tech.powerjob.remote.framework.test;
 
 import lombok.extern.slf4j.Slf4j;
 import tech.powerjob.remote.framework.actor.ActorInfo;
-import tech.powerjob.remote.framework.actor.HandlerInfo;
 import tech.powerjob.remote.framework.cs.CSInitializer;
 import tech.powerjob.remote.framework.cs.CSInitializerConfig;
 import tech.powerjob.remote.framework.transporter.Transporter;

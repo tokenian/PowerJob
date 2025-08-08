@@ -1,9 +1,6 @@
 package tech.powerjob.server.core.scheduler.auxiliary;
 
 import java.io.Serializable;
-
-
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;

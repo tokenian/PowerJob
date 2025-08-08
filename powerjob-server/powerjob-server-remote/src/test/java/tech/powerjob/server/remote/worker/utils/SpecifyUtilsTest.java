@@ -3,8 +3,6 @@ package tech.powerjob.server.remote.worker.utils;
 import org.junit.jupiter.api.Test;
 import tech.powerjob.server.common.module.WorkerInfo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * SpecifyUtilsTest
  *

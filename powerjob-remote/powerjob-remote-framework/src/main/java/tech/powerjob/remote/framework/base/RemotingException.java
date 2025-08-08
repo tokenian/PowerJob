@@ -1,7 +1,5 @@
 package tech.powerjob.remote.framework.base;
 
-import java.io.IOException;
-
 /**
  * RemotingException
  *

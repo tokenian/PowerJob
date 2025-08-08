@@ -1,11 +1,8 @@
 package tech.powerjob.remote.framework.engine.impl;
 
-import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tech.powerjob.common.exception.PowerJobException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * CSInitializerFactoryTest

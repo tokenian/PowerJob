@@ -1,7 +1,7 @@
 package tech.powerjob.server.remote.server.election;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.Data;
+import tech.powerjob.common.PowerSerializable;
 
 
 /**

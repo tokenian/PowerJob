@@ -1,9 +1,9 @@
 package tech.powerjob.common.model;
 
-import tech.powerjob.common.PowerSerializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.powerjob.common.PowerSerializable;
 
 /**
  * Deployed Container Information

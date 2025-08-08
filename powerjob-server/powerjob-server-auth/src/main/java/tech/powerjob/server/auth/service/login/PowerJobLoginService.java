@@ -1,10 +1,10 @@
 package tech.powerjob.server.auth.service.login;
 
+import jakarta.servlet.http.HttpServletRequest;
 import tech.powerjob.server.auth.PowerJobUser;
 import tech.powerjob.server.auth.common.PowerJobAuthException;
 import tech.powerjob.server.auth.login.LoginTypeInfo;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
