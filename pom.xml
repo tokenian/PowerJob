@@ -51,7 +51,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
@@ -84,6 +84,10 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>${maven-compiler-plugin.version}</version>
                         <configuration>
+                            <compilerArgs>
+                                <arg>-parameters</arg>
+                            </compilerArgs>
+                            <parameters>true</parameters>
                             <source>${java.version}</source>
                             <target>${java.version}</target>
                             <testSource>${java.version}</testSource>
@@ -193,6 +197,10 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>${maven-compiler-plugin.version}</version>
                         <configuration>
+                            <compilerArgs>
+                                <arg>-parameters</arg>
+                            </compilerArgs>
+                            <parameters>true</parameters>
                             <source>${java.version}</source>
                             <target>${java.version}</target>
                             <testSource>${java.version}</testSource>

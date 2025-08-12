@@ -39,7 +39,7 @@ public class UseCacheLockAspect {
 
     private static final long SLOW_THRESHOLD = 100;
 
-    @Around(value = "@annotation(useCacheLock))")
+    @Around(value = "@annotation(useCacheLock)")
     public Object execute(ProceedingJoinPoint point, UseCacheLock useCacheLock) throws Throwable {
         Cache<String, ReentrantLock> lockCache = lockContainer.computeIfAbsent(useCacheLock.type(), ignore -> {
             int concurrencyLevel = useCacheLock.concurrencyLevel();

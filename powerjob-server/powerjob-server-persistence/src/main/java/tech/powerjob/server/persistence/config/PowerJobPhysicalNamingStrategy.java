@@ -1,10 +1,11 @@
 package tech.powerjob.server.persistence.config;
-import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
-import tech.powerjob.server.common.PowerJobServerConfigKey;
-import tech.powerjob.server.common.utils.PropertyUtils;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
-import org.apache.commons.lang3.StringUtils;
+import tech.powerjob.server.common.PowerJobServerConfigKey;
+import tech.powerjob.server.common.utils.PropertyUtils;
 
 import java.io.Serializable;
 
@@ -21,7 +22,7 @@ import java.io.Serializable;
  * @author songyinyin
  * @since 2020/7/18
  */
-public class PowerJobPhysicalNamingStrategy extends PhysicalNamingStrategyStandardImpl implements Serializable {
+public class PowerJobPhysicalNamingStrategy extends CamelCaseToUnderscoresNamingStrategy implements Serializable {
 
 
     /**

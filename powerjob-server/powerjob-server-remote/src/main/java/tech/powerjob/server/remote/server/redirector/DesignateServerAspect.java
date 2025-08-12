@@ -48,7 +48,7 @@ public class DesignateServerAspect {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    @Around(value = "@annotation(designateServer))")
+    @Around(value = "@annotation(designateServer)")
     public Object execute(ProceedingJoinPoint point, DesignateServer designateServer) throws Throwable {
 
         // 参数
