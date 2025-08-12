@@ -207,6 +207,20 @@
                             <testTarget>${java.version}</testTarget>
                         </configuration>
                     </plugin>
+                    <!-- Package source codes -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven-source-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <!-- Edit MANIFEST.MF -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

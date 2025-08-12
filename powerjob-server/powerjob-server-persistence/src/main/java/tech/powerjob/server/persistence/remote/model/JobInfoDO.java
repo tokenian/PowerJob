@@ -1,12 +1,12 @@
 package tech.powerjob.server.persistence.remote.model;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import jakarta.persistence.*;
 import java.util.Date;
 
 /**
@@ -53,7 +53,7 @@ public class JobInfoDO {
      * 任务自带的参数
      */
     @Lob
-    @Column
+    @Column(columnDefinition = "text")
     private String jobParams;
 
     /* ************************** 定时参数 ************************** */

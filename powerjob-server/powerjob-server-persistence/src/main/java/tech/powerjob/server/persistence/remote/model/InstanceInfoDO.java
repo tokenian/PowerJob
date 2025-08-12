@@ -1,12 +1,12 @@
 package tech.powerjob.server.persistence.remote.model;
 
-import tech.powerjob.common.enums.InstanceStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import tech.powerjob.common.enums.InstanceStatus;
 
-import jakarta.persistence.*;
 import java.util.Date;
 
 /**
@@ -86,7 +86,7 @@ public class InstanceInfoDO {
      * 执行结果（允许存储稍大的结果）
      */
     @Lob
-    @Column
+    @Column(columnDefinition = "text")
     private String result;
     /**
      * 预计触发时间
