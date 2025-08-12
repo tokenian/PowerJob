@@ -20,8 +20,7 @@ public class FixedDelayTimingStrategyHandler extends AbstractTimingStrategyHandl
         long delay;
 
         try {
-            Duration duration = ApplicationConversionService.getSharedInstance().convert(timeExpression, Duration.class);
-            delay = duration.toMillis();
+            delay = convertSpringTime(timeExpression);
         } catch (Exception e) {
             throw new PowerJobException("invalid timeExpression!");
         }

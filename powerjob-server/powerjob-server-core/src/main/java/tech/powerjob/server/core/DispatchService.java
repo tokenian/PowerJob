@@ -20,6 +20,7 @@ import tech.powerjob.server.common.module.WorkerInfo;
 import tech.powerjob.server.core.instance.InstanceManager;
 import tech.powerjob.server.core.instance.InstanceMetadataService;
 import tech.powerjob.server.core.lock.UseCacheLock;
+import tech.powerjob.server.core.scheduler.auxiliary.AbstractTimingStrategyHandler;
 import tech.powerjob.server.persistence.remote.model.InstanceInfoDO;
 import tech.powerjob.server.persistence.remote.model.JobInfoDO;
 import tech.powerjob.server.persistence.remote.repository.InstanceInfoRepository;
@@ -130,6 +131,9 @@ public class DispatchService {
         // 秒级任务只派发到一台机器，具体的 maxInstanceNum 由 TaskTracker 控制
         if (TimeExpressionType.FREQUENT_TYPES.contains(jobInfo.getTimeExpressionType())) {
             maxInstanceNum = 1;
+
+            //处理spring 时间表达式为通用的毫秒
+            jobInfo.setTimeExpression(String.valueOf(AbstractTimingStrategyHandler.convertSpringTime(jobInfo.getTimeExpression())));
         }
 
         // 0 代表不限制在线任务，还能省去一次 DB 查询
@@ -231,6 +235,7 @@ public class DispatchService {
         if (jobInfo.getInstanceTimeLimit() != null) {
             req.setInstanceTimeoutMS(jobInfo.getInstanceTimeLimit());
         }
+
         req.setThreadConcurrency(jobInfo.getConcurrency());
         return req;
     }
